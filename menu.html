@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Leto 2025 | Capricho Café</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter&display=swap" rel="stylesheet">
+  <style>
+   /* Replace your <style> section with this */
+:root {
+  --primary-color: #007f5f;
+  --bg-color: #fafaf6;
+  --text-color: #2e2e2e;
+  --card-bg: #ffffff;
+  --card-shadow: 0 12px 25px rgba(0,127,95,0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+.main-header {
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo {
+  height: 60px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.section {
+  padding: 60px 20px;
+  max-width: 1280px;
+  margin: auto;
+}
+
+.section > h1 {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.menu-category {
+  margin: 60px auto;
+  padding: 30px;
+  background: #fefdfb; /* soft beige tint */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  max-width: 1100px;
+  border: 1px solid #e4e4e4; /* added subtle border */
+}
+
+.menu-category h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+.menu-card {
+  background: var(--card-bg);
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); /* subtle base shadow */
+  border: 1px solid #e0e0e0; /* more visible border */
+  text-align: center;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 127, 95, 0.25); /* stronger on hover */
+}
+
+.menu-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.menu-card p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.menu-card .price {
+  font-weight: bold;
+  color: #111;
+  margin-top: 4px;
+}
+
+.menu-images {
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.menu-images img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 600px) {
+  .section h1 {
+    font-size: 2.2rem;
+  }
+
+  .menu-card {
+    min-height: auto;
+    padding: 20px 15px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="nav-container">
+      <img src="images/logo.png" alt="Capricho Café Logo" class="logo">
+      <ul class="nav-links">
+        <li><a href="index.html#about">O nás</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="index.html#gallery">Galéria</a></li>
+        <li><a href="index.html#reviews">Recenzie</a></li>
+        <li><a href="events.html">Podujatia</a></li>
+        <li><a href="index.html#contact">Kontakt</a></li>
+        <li><a href="objednavka.html">Objednať Kávu</a></li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <section class="section">
+      <h1>Letné Menu 2025</h1>
+
+      <div class="menu-category">
+        <h2>Káva Iced</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Cold Brew</h3><p class="price">3,60 €</p></div>
+          <div class="menu-card"><h3>Espresso Fresh</h3><p class="price">4,20 €</p></div>
+          <div class="menu-card"><h3>Espresso Tonic</h3><p class="price">3,80 €</p></div>
+          <div class="menu-card"><h3>Affogato Vanilka</h3><p class="price">4,70 €</p></div>
+          <div class="menu-card"><h3>Affogato Pistácia</h3><p class="price">5,60 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Káva Nitro</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Nitro Cold Brew</h3><p class="price">3,60 €</p></div>
+          <div class="menu-card"><h3>Cappuccino Nitro Cold Brew</h3><p class="price">3,90 €</p></div>
+          <div class="menu-card"><h3>Tonic Nitro Cold Brew</h3><p class="price">3,80 €</p></div>
+          <div class="menu-card"><h3>Višňa × Sakura Nitro Cold Brew</h3><p class="price">4,20 €</p></div>
+          <div class="menu-card"><h3>Pomaranč × Kokos Nitro Cold Brew</h3><p class="price">4,20 €</p></div>
+          <div class="menu-card"><h3>Karamel × Rooibos Nitro Cold Brew</h3><p class="price">4,20 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Matcha Cloud Iced</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Višňa × Sakura Matcha Cloud</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card"><h3>Marakuja Matcha Cloud</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card"><h3>Coconut Water Matcha Cloud</h3><p class="price">4,90 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Matcha Latte Iced</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Matcha Latte</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card"><h3>Banana Bread Matcha Latte</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card"><h3>Pistácia Matcha Latte</h3><p class="price">4,90 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Ľadový čaj Nitro</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Nitro Zelený Ľadový čaj</h3><p class="price">3,40 €</p></div>
+          <div class="menu-card"><h3>Nitro Zelený Ľadový čaj Jablko</h3><p class="price">3,90 €</p></div>
+          <div class="menu-card"><h3>Nitro Zelený Ľadový čaj Jasmín</h3><p class="price">3,90 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Letné limonády</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Uhorka × Zázvor</h3><p class="price">4,10 €</p></div>
+          <div class="menu-card"><h3>Ríbezľa × Pomaranč</h3><p class="price">4,10 €</p></div>
+          <div class="menu-card"><h3>Malina × Materina dúška</h3><p class="price">4,10 €</p></div>
+          <div class="menu-card"><h3>Matcha × Baza × Limetka</h3><p class="price">4,10 €</p></div>
+        </div>
+      </div>
+
+     
+    </section>
+  </main>
+</body>
+</html>

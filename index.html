@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pražiareň pod Hradom | Kávaprevšetkých</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script defer>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("mobile-menu");
+      const navLinks = document.querySelector(".nav-links");
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+    });
+  </script>
+</head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("contact-submit");
+  const successMsg = document.getElementById("form-success");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Odosiela sa...";
+
+    const formData = new FormData(form);
+
+    fetch("https://formspree.io/f/mkgbvjza", {
+      method: "POST",
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        form.reset();
+        form.style.display = "none";
+        successMsg.style.display = "block";
+      } else {
+        alert("Chyba pri odosielaní. Skúste to znova.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Odoslať správu";
+      }
+    })
+    .catch(() => {
+      alert("Chyba siete. Skúste znova neskôr.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Odoslať správu";
+    });
+  });
+});
+</script>
+
+<body>
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="index.html#about"><img src="images/logo.png" alt="Kávaprevšetkých logo" class="logo" /></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">O nás</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="#gallery">Galéria</a></li>
+          <li><a href="#reviews">Recenzie</a></li>
+          <li><a href="events.html">Podujatia</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+          <li><a href="objednavka.html">Objednať Kávu</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="mobile-menu">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Pražiareň pod hradom</h1>
+      <p>Výberová káva. Domáce koláče. Príjemná atmosféra v Nitre.</p>
+      <a href="menu.html" class="btn">Pozrieť Menu</a>
+      <a href="objednavka.html" class="btn">Objednať kávu</a>
+    </div>
+    <div class="hero-bg"></div>
+  </section>
+
+  <section id="about" class="section about">
+    <div class="container animated-section">
+      <h2>O nás</h2>
+      <p>Sme rodinná pražiareň a kaviareň v historickom srdci Nitry, len pár krokov od hradu. Pražíme výberovú kávu s dôrazom na pôvod, čerstvosť a chuť. Každý šálok je výsledkom našej vášne a starostlivosti.</p>
+      <div class="about-visuals">
+        <img src="images/roasting.jpg" alt="Praženie kávy" class="about-img" />
+        <img src="images/interior.jpg" alt="Interiér kaviarne" class="about-img" />
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="section gallery">
+    <div class="container">
+      <h2>Galéria</h2>
+      <div class="gallery-grid advanced-gallery">
+        <div class="gallery-item"><img src="images/gallery1.jpg" alt="interiér kaviarne" /></div>
+        <div class="gallery-item"><img src="images/gallery2.jpg" alt="espresso bar" /></div>
+        <div class="gallery-item"><img src="images/gallery3.jpg" alt="káva a koláč" /></div>
+        <div class="gallery-item"><img src="images/gallery4.jpg" alt="pražiareň" /></div>
+        <div class="gallery-item"><img src="images/gallery5.jpg" alt="barista v akcii" /></div>
+        <div class="gallery-item"><img src="images/gallery6.jpg" alt="náš tím" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="section reviews">
+    <div class="container">
+      <h2>Čo hovoria naši zákazníci</h2>
+      <div class="review-grid">
+        <blockquote>
+          „Skvelá káva a najpríjemnejší personál. Sem sa vždy rada vraciam!“<br />
+          <span>- Martina S.</span>
+        </blockquote>
+        <blockquote>
+          „Káva z tejto pražiarne je úplne top. Cítiť remeselný prístup.“<br />
+          <span>- Peter M.</span>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" class="section events">
+    <div class="container">
+      <h2>Podujatia & Workshopy</h2>
+      <div class="event-preview">
+        <h3>Kávový workshop – Praženie & Degustácia</h3>
+        <p><strong>Dátum:</strong> 5. august 2025<br>
+        <strong>Miesto:</strong> Pražiareň pod hradom, Podzámska 5<br>
+        <strong>Popis:</strong> Naučte sa o rôznych druhoch káv, ich pôvode a spôsobe praženia. Súčasťou je cupping a malá súťaž pre hostí.</p>
+        <a href="events.html" class="btn-outline">Zobraziť všetky podujatia</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section extra-info">
+    <div class="container">
+      <h2>Ďalšie informácie</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Dostupné parkovanie</h3>
+          <p>Parkovanie dostupné priamo na ulici alebo pri blízkom parkovisku.</p>
+        </div>
+        <div class="info-card">
+          <h3>Espresso Bar</h3>
+          <p>Rýchla káva so sebou aj na mieste. Profesionálny espresso servis.</p>
+        </div>
+        <div class="info-card">
+          <h3>Podniková predajňa</h3>
+          <p>Možnosť zakúpiť si čerstvo praženú kávu a doplnky priamo u nás.</p>
+        </div>
+        <div class="info-card">
+          <h3>Pražiareň</h3>
+          <p>Vlastná pražiareň s ukážkou procesu. Prehliadky na požiadanie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section instagram-gallery">
+    <div class="container">
+      <h2>Instagram Galéria</h2>
+      <p class="text-center">Sledujte nás na <a href="https://www.instagram.com/kavaprevsetkych_/" target="_blank">@kavaprevsetkych_</a> pre čerstvé fotky a novinky!</p>
+      <div class="insta-grid">
+        <img src="images/insta1.jpg" alt="Instagram 1" />
+        <img src="images/insta2.jpg" alt="Instagram 2" />
+        <img src="images/insta3.jpg" alt="Instagram 3" />
+        <img src="images/insta4.jpg" alt="Instagram 4" />
+        <img src="images/insta5.jpg" alt="Instagram 5" />
+        <img src="images/insta6.jpg" alt="Instagram 6" />
+      </div>
+    </div>
+  </section>
+
+ <section id="contact" class="section contact">
+  <div class="container">
+    <h2>Kontakt</h2>
+    <p><strong>Adresa:</strong> Podzámska 5, Nitra</p>
+    <p><strong>Email:</strong> <a href="mailto:obchod@kavaprevsetkych.sk">obchod@kavaprevsetkych.sk</a></p>
+    <p><strong>Tel:</strong> <a href="tel:+421901717111">+421 901 717 111</a></p>
+    <p><strong>Otváracie hodiny:</strong><br>
+      Po–Pia: 07:00–18:00<br>
+      So: 09:00–18:00<br>
+      Ne: Zatvorené
+    </p>
+    <form class="contact-form" id="contact-form">
+  <input type="text" name="meno" placeholder="Meno" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <textarea name="sprava" placeholder="Vaša správa" rows="4" required></textarea>
+  <button type="submit" id="contact-submit">Odoslať správu</button>
+</form>
+
+<div id="form-success" style="display: none; color: green; text-align: center; margin-top: 20px; font-weight: bold;">
+  ✅ Ďakujeme! Vaša správa bola odoslaná.
+</div>
+
+    <div class="socials">
+      <a href="https://www.facebook.com/p/Kávaprevšetkých_-Pražiareň-pod-hradom-100078107648235/?locale=sk_SK" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/kavaprevsetkych_/" target="_blank">Instagram</a>
+    </div>
+  </div>
+</section>
+
+
+  <footer>
+    <p>&copy; 2025 Kávaprevšetkých – Pražiareň pod hradom. Všetky práva vyhradené.</p>
+    <p style="font-size: 0.85rem; color: #d9fbee;">Vyrobené s ❤️ na Slovensku. | Webdesign by Maxim Mlynek</p>
+  </footer>
+</body>
+</html>
