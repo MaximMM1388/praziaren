@@ -75,7 +75,7 @@ a:hover {
 /* Hero */
 .hero {
   position: relative;
-  background: url('images/gener.jpg') no-repeat center/cover;
+  background: url('gener.jpg') no-repeat center/cover;
   height: 85vh;
   display: flex;
   align-items: center;
