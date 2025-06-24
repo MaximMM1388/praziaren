@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="logo2.png" type="image/png">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Leto 2025 | Pražiareň pod hradom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter&display=swap" rel="stylesheet">
+  <style>
+   /* Replace your <style> section with this */
+:root {
+  --primary-color: #007f5f;
+  --bg-color: #fafaf6;
+  --text-color: #007f5f;
+  --card-bg: #ffffff;
+  --card-shadow: 0 12px 25px rgba(0,127,95,0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* HEADER (synced with index.html) */
+.main-header {
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo {
+  height: 60px;
+}
+
+.main-nav .nav-links {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+
+.nav-links a {
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+ .main-nav .nav-links {
+  position: absolute;
+  top: 70px;        /* alebo 100% ako chceš */
+  right: 20px;      /* posuň menu napravo */
+  width: 200px;     /* pevná šírka, nie 100% */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  z-index: 10000;
+}
+
+  .main-nav .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* FEATURE BANNER */
+.feature-banner {
+  background-color: #e6faf2;
+  color: var(--primary-color);
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #b8e9d7;
+  box-shadow: 0 2px 6px rgba(0,127,95,0.1);
+  font-family: 'Inter', sans-serif;
+}
+
+/* MENU SECTIONS */
+.section {
+  padding: 60px 20px;
+  max-width: 1280px;
+  margin: auto;
+}
+
+.section > h1 {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.menu-category {
+  margin: 60px auto;
+  padding: 30px;
+  background: #fefdfb;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  max-width: 1100px;
+  border: 1px solid #e4e4e4;
+}
+
+.menu-category h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+.menu-card {
+  background: var(--card-bg);
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 140px;
+  position: relative;
+}
+
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 127, 95, 0.25);
+}
+
+.menu-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.menu-card p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.menu-card .price {
+  font-weight: bold;
+  color: #111;
+  margin-top: 4px;
+}
+
+/* IMAGES */
+.menu-images {
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.menu-images img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+    z-index: 10000; /* Pridané pre zobrazenie nad obsahom */
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #007f5f;
+    z-index: 11000; /* Pre istotu, hamburgerka tiež na vrchu */
+  }
+}
+
+/* LIKE BUTTON / EMOJI SYSTEM */
+.like-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 1.8rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.like-btn:hover {
+  transform: scale(1.3);
+}
+
+.emoji-picker {
+  position: absolute;
+  bottom: 60px;
+  right: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.emoji-picker span {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.emoji-picker span:hover {
+  transform: scale(1.2);
+}
+
+/* LIKE ANIMATIONS */
+@keyframes pop {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.8); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.like-btn.pop {
+  animation: popHeart 0.3s ease forwards;
+}
+
+@keyframes popHeart {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.6); }
+  100% { transform: scale(1); }
+}
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+<header class="main-header">
+  <div class="nav-container">
+    <a href="index.html"><img src="logo.png" alt="Capricho Café Logo" class="logo"></a>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="index.html#about">O nás</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="index.html#gallery">Galéria</a></li>
+        <li><a href="index.html#reviews">Recenzie</a></li>
+        <li><a href="podujatia.html">Podujatia</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="objednavka.html">Objednať Kávu</a></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" id="mobile-menu">☰</button>
+  </div>
+</header>
+
+
+  <div class="feature-banner">
+  💡 Novinka! Môžete teraz ohodnotiť svoje obľúbené nápoje kliknutím na nápoj a srdiečko ❤️ – ďakujeme za vašu spätnú väzbu!
+</div>
+
+  <main>
+    <section class="section">
+      <h1>Letné Menu 2025</h1>
+
+      <div class="menu-category">
+        <h2>Káva Iced</h2>
+        <div class="menu-grid">
+          <div class="menu-card default-liked"><h3>Cold Brew</h3><p class="price">3,60 €</p></div>
+          <div class="menu-card"><h3>Espresso Fresh</h3><p class="price">4,20 €</p></div>
+          <div class="menu-card"><h3>Espresso Tonic</h3><p class="price">3,80 €</p></div>
+          <div class="menu-card"><h3>Affogato Vanilka</h3><p class="price">4,70 €</p></div>
+          <div class="menu-card default-liked"><h3>Affogato Pistácia</h3><p class="price">5,60 €</p></div>
+
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Káva Nitro</h2>
+        <div class="menu-grid">
+          <div class="menu-card default-liked"><h3>Nitro Cold Brew</h3><p class="price">3,60 €</p></div>
+          <div class="menu-card"><h3>Cappuccino Nitro Cold Brew</h3><p class="price">3,90 €</p></div>
+          <div class="menu-card"><h3>Tonic Nitro Cold Brew</h3><p class="price">3,80 €</p></div>
+          <div class="menu-card"><h3>Višňa × Sakura Nitro Cold Brew</h3><p class="price">4,20 €</p></div>
+          <div class="menu-card"><h3>Pomaranč × Kokos Nitro Cold Brew</h3><p class="price">4,20 €</p></div>
+          <div class="menu-card"><h3>Karamel × Rooibos Nitro Cold Brew</h3><p class="price">4,20 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Matcha Cloud Iced</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Višňa × Sakura Matcha Cloud</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card"><h3>Marakuja Matcha Cloud</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card default-liked"><h3>Coconut Water Matcha Cloud</h3><p class="price">4,90 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Matcha Latte Iced</h2>
+        <div class="menu-grid">
+          <div class="menu-card default-liked"><h3>Matcha Latte</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card"><h3>Banana Bread Matcha Latte</h3><p class="price">4,90 €</p></div>
+          <div class="menu-card"><h3>Pistácia Matcha Latte</h3><p class="price">4,90 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Ľadový čaj Nitro</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Nitro Zelený Ľadový čaj</h3><p class="price">3,40 €</p></div>
+          <div class="menu-card"><h3>Nitro Zelený Ľadový čaj Jablko</h3><p class="price">3,90 €</p></div>
+          <div class="menu-card default-liked"><h3>Nitro Zelený Ľadový čaj Jasmín</h3><p class="price">3,90 €</p></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h2>Letné limonády</h2>
+        <div class="menu-grid">
+          <div class="menu-card"><h3>Uhorka × Zázvor</h3><p class="price">4,10 €</p></div>
+          <div class="menu-card"><h3>Ríbezľa × Pomaranč</h3><p class="price">4,10 €</p></div>
+          <div class="menu-card default-liked"><h3>Malina × Materina dúška</h3><p class="price">4,10 €</p></div>
+          <div class="menu-card"><h3>Matcha × Baza × Limetka</h3><p class="price">4,10 €</p></div>
+        </div>
+      </div>
+
+     
+    </section>
+  </main>
+
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.menu-card');
+  const formspreeURL = 'https://formspree.io/f/mldnwqbl';
+
+  const createLikeButton = (card, initialEmoji = '❤️') => {
+    const likeBtn = document.createElement('button');
+    likeBtn.innerHTML = initialEmoji;
+    likeBtn.classList.add('like-btn');
+
+    likeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      const existing = card.querySelector('.emoji-picker');
+      if (existing) {
+        existing.remove();
+        return;
+      }
+
+      const picker = document.createElement('div');
+      picker.classList.add('emoji-picker');
+      ['❤️', '💚', '🔥', '⭐', '🥤', '😋'].forEach(emoji => {
+        const opt = document.createElement('span');
+        opt.textContent = emoji;
+
+        opt.addEventListener('click', () => {
+          likeBtn.innerHTML = emoji;
+
+          // Animate button
+          likeBtn.classList.remove('pop');
+          void likeBtn.offsetWidth; // force reflow
+          likeBtn.classList.add('pop');
+
+          picker.remove();
+
+          // Send emoji + title to Formspree
+          const drinkName = card.querySelector('h3')?.textContent || 'Unknown item';
+          fetch(formspreeURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              _subject: 'New Menu Like',
+              item: drinkName,
+              emoji: emoji
+            })
+          }).then(() => {
+            console.log(`Sent ${emoji} for ${drinkName}`);
+          }).catch(err => console.error('Formspree error:', err));
+        });
+
+        picker.appendChild(opt);
+      });
+
+      card.appendChild(picker);
+    });
+
+    card.appendChild(likeBtn);
+  };
+
+  cards.forEach(card => {
+    if (card.classList.contains('default-liked')) {
+      createLikeButton(card);
+    }
+
+    card.addEventListener('click', () => {
+      if (!card.querySelector('.like-btn')) {
+        document.querySelectorAll('.like-btn, .emoji-picker').forEach(el => el.remove());
+        createLikeButton(card);
+      }
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('mobile-menu');
+  const navLinks = document.querySelector('.main-nav .nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+});
+</script>
+
+
+
+
+
+</body>
+</html>

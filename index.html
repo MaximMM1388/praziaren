@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <!-- Primary Meta Tags -->
+<title>Pražiareň pod Hradom </title>
+<meta name="description" content="Pražiareň pod Hradom – lokálna pražiareň kávy v Nitre. Ochutnajte výberovú kávu od kavaprekaždeho, priamo pod hradom.">
+
+<!-- SEO Keywords -->
+<meta name="keywords" content="káva Nitra, pražiareň Nitra, lokálna káva, kavaprekaždeho, pražiareň pod Hradom, výberová káva, káva na Slovensku, kávový obchod Nitra">
+
+<!-- Author -->
+<meta name="author" content="Pražiareň pod Hradom">
+
+<!-- Social (Optional, can be extended later) -->
+<meta property="og:title" content="Pražiareň pod Hradom" />
+<meta property="og:description" content="Výberová káva z pražiarne pod hradom. Navštívte nás v Nitre a ochutnajte kávu kavaprekaždeho." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.kavaprevssetkych.sk" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<link rel="icon" href="logo2.png" type="image/png">
+
+
+<!-- Viewport for mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pražiareň pod Hradom | Kávaprevšetkých</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // === Mobile menu toggle ===
+  const menuToggle = document.getElementById("mobile-menu");
+  const navLinks = document.querySelector(".nav-links");
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+  });
+
+  // === Contact form ===
+  const form = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("contact-submit");
+  const successMsg = document.getElementById("form-success");
+
+  form?.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Odosiela sa...";
+
+    const formData = new FormData(form);
+
+    fetch("https://formspree.io/f/mkgbvjza", {
+      method: "POST",
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        form.reset();
+        form.style.display = "none";
+        successMsg.style.display = "block";
+      } else {
+        alert("Chyba pri odosielaní. Skúste to znova.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Odoslať správu";
+      }
+    })
+    .catch(() => {
+      alert("Chyba siete. Skúste znova neskôr.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Odoslať správu";
+    });
+  });
+
+  // === Like feature in gallery ===
+  const galleryItems = document.querySelectorAll(".gallery-item.likeable, .insta-grid img");
+
+galleryItems.forEach((item, index) => {
+  // Create emoji bar if it doesn't exist
+  let emojiBar = item.querySelector?.(".emoji-bar");
+
+  // For Instagram images, wrap them dynamically
+  if (!emojiBar && item.tagName === "IMG") {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("gallery-item", "likeable");
+    wrapper.dataset.image = item.src.split('/').pop(); // use filename as ID
+
+    // Create emoji bar
+    emojiBar = document.createElement("div");
+    emojiBar.classList.add("emoji-bar", "hidden");
+    ["❤️", "👍", "😍", "☕"].forEach(emojiChar => {
+      const emoji = document.createElement("span");
+      emoji.classList.add("emoji");
+      emoji.textContent = emojiChar;
+      emojiBar.appendChild(emoji);
+    });
+
+    // Replace image with wrapper
+    item.parentNode.insertBefore(wrapper, item);
+    wrapper.appendChild(item);
+    wrapper.appendChild(emojiBar);
+    item = wrapper; // continue logic with wrapper
+  }
+
+  item.addEventListener("click", () => {
+    emojiBar.classList.toggle("hidden");
+  });
+
+  const emojis = emojiBar.querySelectorAll(".emoji");
+  emojis.forEach(emoji => {
+    emoji.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const selectedEmoji = emoji.textContent;
+      const imageId = item.dataset.image;
+
+      fetch("https://formspree.io/f/mldnwqbl", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          emoji: selectedEmoji,
+          image: imageId
+        })
+      }).then(() => {
+        emojiBar.innerHTML = `<span class="reaction-thankyou">Ďakujeme za reakciu! ${selectedEmoji}</span>`;
+      }).catch(() => {
+        alert("Nepodarilo sa odoslať reakciu.");
+      });
+    });
+  });
+});
+
+
+  galleryItems.forEach((item) => {
+    const emojiBar = item.querySelector(".emoji-bar");
+
+    item.addEventListener("click", () => {
+      emojiBar.classList.toggle("hidden");
+    });
+
+    const emojis = emojiBar.querySelectorAll(".emoji");
+    emojis.forEach(emoji => {
+      emoji.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        const selectedEmoji = emoji.textContent;
+        const imageId = item.dataset.image;
+
+        fetch("https://formspree.io/f/mldnwqbl", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            emoji: selectedEmoji,
+            image: imageId
+          })
+        }).then(() => {
+          emojiBar.innerHTML = `<span class="reaction-thankyou">Ďakujeme za reakciu! ${selectedEmoji}</span>`;
+        }).catch(() => {
+          alert("Nepodarilo sa odoslať reakciu.");
+        });
+      });
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const stars = document.querySelectorAll('.star');
+  const thankYouMsg = document.querySelector('#thankYouMessage');
+  const googleReviewLink = "https://www.google.com/search?sca_esv=ccb8066356fd07b7&rlz=1C1CHBF_enSK1119SK1119&tbm=lcl&sxsrf=AE3TifM0nxCluDJ0agnBAqJgmsOGcGukpA:1750763496661&q=K%C3%A1vaprev%C5%A1etk%C3%BDch_+Pra%C5%BEiare%C5%88+pod+Hradom+Recenzie&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2NbAwMzQwNDA3NTezNLY0NDEx2cDI-IrR2PvwwrLEgqLUsqMLU0uyD-9NzohXCChKPLovM7Eo9WiHQkF-ioJHUWJKfq5CUGpyal5VZuoiVnJ0AQBzUMIohgAAAA&rldimm=5086101075769391444&hl=sk-SK&sa=X&ved=2ahUKEwjmp7ei9omOAxWUgP0HHZHcK_kQ9fQKegQINRAF&biw=1707&bih=870&dpr=1.5#lkt=LocalPoiReviews&lrd=0x476b3f2b2dba20ab:0x469575fb28f77954,3,,,,";
+  
+  let selectedRating = 0;
+  thankYouMsg.classList.remove('visible'); // Hide message on page load
+
+  function updateStars(hoverIndex = null) {
+    stars.forEach((star, index) => {
+      star.classList.remove('hovered', 'selected');
+      if (hoverIndex !== null && index <= hoverIndex) {
+        star.classList.add('hovered');
+      } else if (selectedRating !== 0 && index < selectedRating) {
+        star.classList.add('selected');
+      }
+    });
+  }
+
+  async function sendRatingToFormspree(rating) {
+    try {
+      const response = await fetch("https://formspree.io/f/mvgrwjkb", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rating: rating })
+      });
+
+      if (response.ok) {
+        thankYouMsg.classList.add('visible');  // Show thank you message here
+      } else {
+        alert("Chyba pri odosielaní hodnotenia.");
+      }
+    } catch (error) {
+      alert("Chyba pri odosielaní hodnotenia.");
+    }
+  }
+
+  stars.forEach((star, index) => {
+    star.addEventListener('mouseenter', () => {
+      updateStars(index);
+    });
+
+    star.addEventListener('mouseleave', () => {
+      updateStars(null);
+    });
+
+    star.addEventListener('click', () => {
+      selectedRating = index + 1;
+      updateStars(null);
+
+      thankYouMsg.classList.remove('visible'); // Hide any previous message on new click
+
+      if (selectedRating === 5) {
+        window.open(googleReviewLink, '_blank');
+      } else {
+        sendRatingToFormspree(selectedRating);
+      }
+    });
+  });
+});
+
+</script>
+
+
+<body>
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="index.html#about"><img src="logo.png" alt="Kávaprevšetkých logo" class="logo" /></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">O nás</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="#gallery">Galéria</a></li>
+          <li><a href="#reviews">Recenzie</a></li>
+          <li><a href="podujatia.html">Podujatia</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="objednavka.html">Objednať Kávu</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="mobile-menu">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Pražiareň pod hradom</h1>
+      <p>Výberová káva. Domáce koláče. Príjemná atmosféra v Nitre.</p>
+      <div class="hero-buttons">
+  <a href="menu.html" class="btn">Pozrieť Menu</a>
+  <a href="objednavka.html" class="btn">Objednať kávu</a>
+</div>
+      
+    </div>
+    <div class="hero-bg"></div>
+  </section>
+
+  <section id="about" class="section about">
+    <div class="container animated-section">
+      <h2>O nás</h2>
+      <p>Sme rodinná pražiareň a kaviareň v historickom srdci Nitry, len pár krokov od hradu. Pražíme výberovú kávu s dôrazom na pôvod, čerstvosť a chuť. Každý šálok je výsledkom našej vášne a starostlivosti.</p>
+      <div class="about-visuals">
+        <img src="roasting.jpg" alt="Praženie kávy" class="about-img " />
+        <img src="interior.jpg" alt="Interiér kaviarne" class="about-img" />
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="section gallery">
+   
+
+    <div class="container">
+      <h2>Galéria</h2>
+       <div class="like-feature-announcement">
+  🎉 Novinka: Môžete lajkovať vaše obľúbené fotografie! Kliknite na obrázok a dajte nám vedieť, ktorý sa vám páči. 💖
+</div>
+      <div class="gallery-grid advanced-gallery">
+      <div class="gallery-item likeable" data-image="gallery1.jpg">
+
+
+  <img src="gallery1.jpg" alt="interiér kaviarne" />
+  <div class="emoji-bar">
+    <span class="emoji">❤️</span>
+    <span class="emoji">👍</span>
+    <span class="emoji">😍</span>
+    <span class="emoji">☕</span>
+  </div>
+  <div class="default-like">❤️</div>
+</div>
+        <div class="gallery-item likeable" data-image="gallery1.jpg">
+  <img src="gallery2.jpg" alt="interiér kaviarne" />
+  <div class="emoji-bar">
+    <span class="emoji">❤️</span>
+    <span class="emoji">👍</span>
+    <span class="emoji">😍</span>
+    <span class="emoji">☕</span>
+  </div>
+ 
+</div>
+        <div class="gallery-item likeable" data-image="gallery1.jpg">
+  <img src="gallery3.jpg" alt="interiér kaviarne" />
+  <div class="emoji-bar">
+    <span class="emoji">❤️</span>
+    <span class="emoji">👍</span>
+    <span class="emoji">😍</span>
+    <span class="emoji">☕</span>
+  </div>
+ 
+</div>
+        <div class="gallery-item likeable" data-image="gallery1.jpg">
+  <img src="gallery4.jpg" alt="interiér kaviarne" />
+  <div class="emoji-bar">
+    <span class="emoji">❤️</span>
+    <span class="emoji">👍</span>
+    <span class="emoji">😍</span>
+    <span class="emoji">☕</span>
+  </div>
+  
+</div>
+      <div class="gallery-item likeable" data-image="gallery1.jpg">
+  <img src="gallery5.jpg" alt="interiér kaviarne" />
+  <div class="emoji-bar">
+    <span class="emoji">❤️</span>
+    <span class="emoji">👍</span>
+    <span class="emoji">😍</span>
+    <span class="emoji">☕</span>
+  </div>
+  
+</div>
+       <div class="gallery-item likeable" data-image="gallery1.jpg">
+  <img src="gallery6.jpg" alt="interiér kaviarne" />
+  <div class="emoji-bar">
+    <span class="emoji">❤️</span>
+    <span class="emoji">👍</span>
+    <span class="emoji">😍</span>
+    <span class="emoji">☕</span>
+  </div>
+ 
+</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="section reviews">
+    <div class="container">
+      <h2>Čo hovoria naši zákazníci</h2>
+      <div class="review-grid">
+        <blockquote>
+          „Skvelá káva a najpríjemnejší personál. Sem sa vždy rada vraciam!“<br />
+          <span>- Martina S.</span>
+        </blockquote>
+        <blockquote>
+          „Káva z tejto pražiarne je úplne top. Cítiť remeselný prístup.“<br />
+          <span>- Peter M.</span>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" class="section events">
+    <div class="container">
+      <h2>Podujatia & Workshopy</h2>
+      <div class="event-preview">
+        <h3>Kávový workshop – Praženie & Degustácia</h3>
+        <p><strong>Dátum:</strong> 5. august 2025<br>
+        <strong>Miesto:</strong> Pražiareň pod hradom, Podzámska 5<br>
+        <strong>Popis:</strong> Naučte sa o rôznych druhoch káv, ich pôvode a spôsobe praženia. Súčasťou je cupping a malá súťaž pre hostí.</p>
+        <a href="podujatia.html" class="btn-outline">Zobraziť všetky podujatia</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section extra-info">
+    <div class="container">
+      <h2>Ďalšie informácie</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Dostupné parkovanie</h3>
+          <p>Parkovanie dostupné priamo na ulici alebo pri blízkom parkovisku.</p>
+        </div>
+        <div class="info-card">
+          <h3>Espresso Bar</h3>
+          <p>Rýchla káva so sebou aj na mieste. Profesionálny espresso servis.</p>
+        </div>
+        <div class="info-card">
+          <h3>Podniková predajňa</h3>
+          <p>Možnosť zakúpiť si čerstvo praženú kávu a doplnky priamo u nás.</p>
+        </div>
+        <div class="info-card">
+          <h3>Pražiareň</h3>
+          <p>Vlastná pražiareň s ukážkou procesu. Prehliadky na požiadanie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section instagram-gallery">
+    <div class="container">
+      <h2>Instagram Galéria</h2>
+           <div class="like-feature-announcement">
+  🎉 Novinka: Môžete lajkovať vaše obľúbené fotografie! Kliknite na obrázok a dajte nám vedieť, ktorý sa vám páči. 💖
+</div>
+      <p class="text-center">Sledujte nás na <a href="https://www.instagram.com/kavaprevsetkych_/" target="_blank">@kavaprevsetkych_</a> pre čerstvé fotky a novinky!</p>
+      <div class="insta-grid">
+        <img src="insta1.jpg" alt="Instagram 1" />
+        <img src="insta2.jpg" alt="Instagram 2" />
+        <img src="insta3.jpg" alt="Instagram 3" />
+        <img src="insta4.jpg" alt="Instagram 4" />
+        <img src="insta5.jpg" alt="Instagram 5" />
+        <img src="insta6.jpg" alt="Instagram 6" />
+      </div>
+    </div>
+  </section>
+
+ <section id="contact" class="section contact">
+  <div class="container">
+    <h2>Kontakt</h2>
+    <p><strong>Adresa:</strong> Podzámska 5, Nitra</p>
+    <p><strong>Email:</strong> <a href="mailto:obchod@kavaprevsetkych.sk">obchod@kavaprevsetkych.sk</a></p>
+    <p><strong>Tel:</strong> <a href="tel:+421901717111">+421 901 717 111</a></p>
+    <p><strong>Otváracie hodiny:</strong><br>
+      Po–Pia: 07:00–18:00<br>
+      So: 09:00–18:00<br>
+      Ne: Zatvorené
+    </p>
+    <form class="contact-form" id="contact-form">
+  <input type="text" name="meno" placeholder="Meno" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <textarea name="sprava" placeholder="Vaša správa" rows="4" required></textarea>
+  <button type="submit" id="contact-submit">Odoslať správu</button>
+</form>
+
+
+
+<div id="form-success" style="display: none; color: green; text-align: center; margin-top: 20px; font-weight: bold;">
+  ✅ Ďakujeme! Vaša správa bola odoslaná.
+</div>
+
+<div class="rating-widget">
+  <h3 class="rating-title">Ohodnoťte nás</h3>
+  <form id="ratingForm" action="https://formspree.io/f/mvgrwjkb" method="POST">
+  <div class="star-rating">
+    <input type="hidden" name="rating" id="starValue" />
+    <span class="star" data-value="1">&#9733;</span>
+    <span class="star" data-value="2">&#9733;</span>
+    <span class="star" data-value="3">&#9733;</span>
+    <span class="star" data-value="4">&#9733;</span>
+    <span class="star" data-value="5">&#9733;</span>
+  </div>
+</form>
+
+<p id="thankYouMessage">Ďakujeme za spätnú väzbu!</p>
+
+</div>
+
+
+
+
+   <div class="socials">
+  <a href="https://www.facebook.com/p/Kávaprevšetkých_-Pražiareň-pod-hradom-100078107648235/?locale=sk_SK" target="_blank" aria-label="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.instagram.com/kavaprevsetkych_/" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+</div>
+
+  </div>
+</section>
+
+
+  <footer>
+    <p>&copy; 2025 Kávaprevšetkých – Pražiareň pod hradom. Všetky práva vyhradené.</p>
+    <p style="font-size: 0.85rem; color: #d9fbee;">Vyrobené s ❤️ na Slovensku. | Webdesign by Maxim Mlynek</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <link rel="icon" href="logo2.png" type="image/png">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Platba | Kávaprevšetkých</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #fcfcfc;
+    line-height: 1.6;
+  }
+
+  header, footer {
+    background: #fff;
+    padding: 16px 32px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+
+  .nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    height: 48px;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #005f46;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: white;
+  }
+
+  .section {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #004d3a;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .order-summary, .form-section, #paypal-section {
+    background: #f4f9f6;
+    padding: 30px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 18px rgba(0,127,95,0.1);
+  }
+
+  .order-summary h3, .form-section h3, #paypal-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: #007f5f;
+  }
+
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #dcece5;
+  }
+
+  .order-total {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 12px;
+    color: #004d3a;
+  }
+
+  label {
+    display: block;
+    margin: 16px 0 6px;
+    font-weight: 600;
+    color: #004d3a;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c2d8cc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  input:focus, textarea:focus {
+    border-color: #007f5f;
+    box-shadow: 0 0 0 2px rgba(0, 127, 95, 0.2);
+    outline: none;
+    background-color: #f9fdfc;
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+
+  .btn {
+    background: #007f5f;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+  }
+
+  .btn:hover {
+    background: #005f42;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  #paypal-section {
+    display: none;
+    text-align: center;
+  }
+
+  #ref-code {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 12px 0;
+    color: #a00000;
+    letter-spacing: 1px;
+  }
+
+  #paypal-link {
+    background: #0070ba;
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+  #paypal-link:hover {
+    background: #004f89;
+  }
+
+  footer {
+    text-align: center;
+    color: #777;
+    font-size: 0.9rem;
+    margin-top: 60px;
+  }
+
+  @media (max-width: 768px) {
+  /* Hide menu by default */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 60px; /* Adjust based on header height */
+    right: 20px;
+    width: 200px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  /* Show when active */
+  .nav-links.active {
+    display: flex;
+  }
+
+  /* Show hamburger */
+  .menu-toggle {
+    display: block;
+  }
+}
+</style>
+
+</head>
+<body>
+  <header class="main-header">
+    <div class="nav-container">
+      <a href="index.html"><img src="logo.png" alt="logo" class="logo" /></a>
+      <ul class="nav-links">
+        <li><a href="index.html#about">O nás</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="index.html#gallery">Galéria</a></li>
+        <li><a href="index.html#reviews">Recenzie</a></li>
+        <li><a href="podujatia.html">Podujatia</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="objednavka.html">Objednať Kávu</a></li>
+      </ul>
+          <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
+      &#9776;
+    </button>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Platba a doručenie objednávky</h2>
+
+    <div class="order-summary" id="order-summary">
+      <h3>Vaša objednávka</h3>
+      <div id="order-items"></div>
+      <div class="order-total" id="order-total"></div>
+    </div>
+
+<div id="payment-info" style="
+  background: #e7f5ef; 
+  border: 2px solid #007f5f; 
+  color: #004d3a; 
+  padding: 15px 20px; 
+  border-radius: 12px; 
+  max-width: 700px; 
+  margin: 20px auto 10px auto; 
+  font-weight: 600; 
+  font-size: 1rem;
+  text-align: center;
+">
+  Momentálne sú dostupné iba tieto spôsoby platby: <strong>PayPal</strong> alebo <strong>Platba na dobierku</strong>.
+</div>
+
+   <form id="shipping-form" class="form-section">
+  <h3>Doručovacie údaje</h3>
+
+  <label for="name">Meno a priezvisko</label>
+  <input type="text" id="name" placeholder="Ján Novák" required />
+
+  <label for="email">Email</label>
+  <input type="email" id="email" placeholder="jan@example.com" required />
+
+  <label for="address">Adresa</label>
+  <input type="text" id="address" placeholder="Hlavná 123" required />
+
+  <label for="city">Mesto</label>
+  <input type="text" id="city" placeholder="Bratislava" required />
+
+  <label for="zip">PSČ</label>
+  <input type="text" id="zip" placeholder="811 01" required />
+
+  <label for="note">Poznámka k doručeniu (voliteľné)</label>
+  <textarea id="note" placeholder="Napríklad: doručiť po 16:00, zvoniť na byt 8, alternatívna adresa..."></textarea>
+
+  <button type="submit" class="btn">Potvrdiť a prejsť na platbu</button>
+</form>
+
+    <div id="paypal-section">
+      <h3>Pokračujte na platbu</h3>
+      <p>Vaša objednávka má cenu <strong id="final-price"></strong>.</p>
+      <p>Do poznámky k platbe uveďte tento kód objednávky:</p>
+      <div id="ref-code"></div>
+      <a id="paypal-link" href="#" target="_blank" class="btn">Zaplatiť cez PayPal</a>
+    </div>
+
+    <div id="payment-choice" style="display: none; text-align: center;">
+  <h3>Vyberte spôsob platby</h3>
+  <p>Celková suma: <strong id="choice-price"></strong></p>
+  <p>Kód vašej objednávky: <span id="choice-ref" style="font-weight: bold; color: #a00000;"></span></p>
+
+  <button id="choose-paypal" class="btn" style="margin-bottom: 10px;">Zaplatiť cez PayPal</button>
+  <button id="choose-cod" class="btn" style="background: #555;">Zaplatiť pri doručení</button>
+</div>
+
+<div id="cod-confirmation" style="display: none; text-align: center;">
+  <h3>Ďakujeme za vašu objednávku!</h3>
+  <p>Vybrali ste možnosť <strong>Dobierka</strong>. Pri doručení zaplatíte <strong id="cod-price"></strong>.</p>
+  <p>Prosím, poznačte si tento kód objednávky:</p>
+  <div id="cod-ref" style="font-size: 1.4rem; font-weight: bold; color: #a00000;"></div>
+</div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Kávaprevšetkých – Pražiareň pod hradom. Všetky práva vyhradené.</p>
+  </footer>
+
+<script>
+function generateReferenceCode() {
+  return "ORD-" + Math.floor(100000 + Math.random() * 900000);
+}
+
+function calculateTotal(cart) {
+  return cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("shipping-form");
+  const paypalSection = document.getElementById("paypal-section");
+  const orderItems = document.getElementById("order-items");
+  const orderTotal = document.getElementById("order-total");
+
+  const paymentChoice = document.getElementById("payment-choice");
+  const codConfirmation = document.getElementById("cod-confirmation");
+
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const total = calculateTotal(cart);
+
+  // Render order summary
+  cart.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "order-item";
+    div.innerHTML = `<span>${item.name}</span><span>${item.price.toFixed(2)} €</span>`;
+    orderItems.appendChild(div);
+  });
+  orderTotal.textContent = `Spolu: ${total} €`;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector("button[type='submit']");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Odosiela sa...";
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const zip = document.getElementById("zip").value.trim();
+    const note = document.getElementById("note") ? document.getElementById("note").value.trim() : "";
+    const cartSummary = cart.map(item => `${item.name} – ${item.price.toFixed(2)} €`).join("\n");
+    const reference = generateReferenceCode();
+
+    const formData = {
+      name,
+      email,
+      address,
+      city,
+      zip,
+      note,
+      total: `${total} €`,
+      items: cartSummary,
+      reference
+    };
+
+    fetch("https://formspree.io/f/mvgrbkqj", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (response.ok) {
+        form.style.display = "none";
+
+        paymentChoice.style.display = "block";
+        document.getElementById("choice-price").textContent = `${total} €`;
+        document.getElementById("choice-ref").textContent = reference;
+
+        localStorage.removeItem("cart");
+
+        // PayPal button
+        document.getElementById("choose-paypal").addEventListener("click", () => {
+          paymentChoice.style.display = "none";
+          paypalSection.style.display = "block";
+
+          document.getElementById("ref-code").textContent = reference;
+          document.getElementById("final-price").textContent = `${total} €`;
+
+          const paypalBase = "https://www.paypal.com/paypalme/YourUsername"; // Replace with your PayPal URL
+          const paypalLink = `${paypalBase}/${total}?note=Objednávka ${reference}`;
+          document.getElementById("paypal-link").href = paypalLink;
+
+          // Send payment method to Formspree
+          fetch("https://formspree.io/f/mvgrbkqj", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({ reference, paymentMethod: "PayPal" })
+          });
+        });
+
+        // Dobierka button
+        document.getElementById("choose-cod").addEventListener("click", () => {
+          paymentChoice.style.display = "none";
+          codConfirmation.style.display = "block";
+
+          document.getElementById("cod-price").textContent = `${total} €`;
+          document.getElementById("cod-ref").textContent = reference;
+
+          // Send payment method to Formspree
+          fetch("https://formspree.io/f/mvgrbkqj", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({ reference, paymentMethod: "Dobierka" })
+          });
+        });
+
+      } else {
+        throw new Error("Form submission failed.");
+      }
+    })
+    .catch(err => {
+      console.error("Chyba pri odoslaní:", err);
+      alert("Nepodarilo sa odoslať objednávku. Skúste to neskôr.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Potvrdiť a prejsť na platbu";
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('mobile-menu');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+});
+
+
+</script>
+</body>
+</html>

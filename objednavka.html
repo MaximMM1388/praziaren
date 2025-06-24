@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <link rel="icon" href="logo2.png" type="image/png">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Objednávka Kávy | Kávaprevšetkých</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .cart-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .cart-item {
+      background: #f4f9f6;
+      margin-bottom: 10px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 12px rgba(0,127,95,0.08);
+      animation: fadeIn 0.4s ease;
+    }
+    .remove-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      color: #e63946;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .remove-btn:hover {
+      color: #a00000;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 768px) {
+  /* Hide menu by default */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 60px; /* Adjust based on header height */
+    right: 20px;
+    width: 200px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  /* Show when active */
+  .nav-links.active {
+    display: flex;
+  }
+
+  /* Show hamburger */
+  .menu-toggle {
+    display: block;
+  }
+.menu-grid{
+
+display: flex; 
+  align-items: center;
+  
+}
+      
+}
+  </style>
+  <script defer>
+    const cart = [];
+
+   function addToCart(name, price) {
+  cart.push({ name, price });
+  updateCartUI();
+  updateLocalStorage(); // ULOŽ KOŠÍK
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCartUI();
+  updateLocalStorage(); // ULOŽ KOŠÍK
+}
+
+
+    function updateCartUI() {
+      const cartList = document.getElementById("cart-items");
+      const total = document.getElementById("cart-total");
+      cartList.innerHTML = "";
+      let sum = 0;
+
+      cart.forEach((item, i) => {
+        const li = document.createElement("li");
+        li.className = "cart-item";
+
+        const text = document.createElement("span");
+        text.textContent = `${item.name} – ${item.price.toFixed(2)} €`;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "❌";
+        removeBtn.className = "remove-btn";
+        removeBtn.onclick = () => removeFromCart(i);
+
+        li.appendChild(text);
+        li.appendChild(removeBtn);
+        cartList.appendChild(li);
+
+        sum += item.price;
+      });
+
+      total.textContent = `Spolu: ${sum.toFixed(2)} €`;
+    }
+
+    function updateLocalStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  if (savedCart.length > 0) {
+    savedCart.forEach(item => cart.push(item));
+    updateCartUI();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('mobile-menu');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+});
+
+
+
+  </script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="index.html"><img src="logo.png" alt="logo" class="logo" /></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html#about">O nás</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="index.html#gallery">Galéria</a></li>
+          <li><a href="index.html#reviews">Recenzie</a></li>
+          <li><a href="podujatia.html">Podujatia</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="objednavka.html">Objednať Kávu</a></li>
+        </ul>
+      </nav>
+          <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
+      &#9776;
+    </button>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>Objednajte si svoju obľúbenú kávu</h2>
+      <p>Vyberte si z našej ponuky a vytvorte si svoju objednávku. Objednávky sú zatiaľ informatívne, platba prebehne na ďalšej stránke.</p>
+
+      <div class="menu-grid">
+        <div class="menu-card">
+          <h3>Cold Brew</h3>
+          <p>Osviežujúca káva lúhovaná za studena.</p>
+          <p class="price">3,60 €</p>
+          <button onclick="addToCart('Cold Brew', 3.60)">Pridať do košíka</button>
+        </div>
+        <div class="menu-card">
+          <h3>Espresso Tonic</h3>
+          <p>Intenzívne espresso s bublinkovým tonicom.</p>
+          <p class="price">3,80 €</p>
+          <button onclick="addToCart('Espresso Tonic', 3.80)">Pridať do košíka</button>
+        </div>
+        <div class="menu-card">
+          <h3>Affogato Pistácia</h3>
+          <p>Espresso s kopčekom pistáciovej zmrzliny.</p>
+          <p class="price">5,60 €</p>
+          <button onclick="addToCart('Affogato Pistácia', 5.60)">Pridať do košíka</button>
+        </div>
+        <div class="menu-card">
+          <h3>Višňa × Sakura Nitro</h3>
+          <p>Nezvyčajné spojenie višne a japonskej sakury.</p>
+          <p class="price">4,20 €</p>
+          <button onclick="addToCart('Višňa × Sakura Nitro', 4.20)">Pridať do košíka</button>
+        </div>
+        <div class="menu-card">
+          <h3>Matcha Latte</h3>
+          <p>Krémové zelené matcha latte s ľadom.</p>
+          <p class="price">4,90 €</p>
+          <button onclick="addToCart('Matcha Latte', 4.90)">Pridať do košíka</button>
+        </div>
+      </div>
+
+      <div class="events" style="margin-top: 60px;">
+        <h3>🛒 Nákupný košík</h3>
+        <ul id="cart-items" class="cart-list"></ul>
+        <p id="cart-total" style="font-weight: bold; font-size: 1.2rem; margin-top: 20px;">Spolu: 0.00 €</p>
+        <a href="platba.html" class="btn" style="margin-top: 20px; display: inline-block;">Prejsť na platbu</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Kávaprevšetkých – Pražiareň pod hradom. Všetky práva vyhradené.</p>
+  </footer>
+</body>
+</html>

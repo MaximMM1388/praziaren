@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <link rel="icon" href="logo2.png" type="image/png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podujatia | Pražiareň pod Hradom</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fafaf6;
+      color: #2e2e2e;
+      line-height: 1.6;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    .main-header {
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    .logo {
+      height: 60px;
+      cursor: pointer;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #007f5f;
+    }
+    .nav-links a:hover {
+      background-color: #007f5f;
+      color: #fff;
+    }
+    .menu-toggle {
+      display: none;
+    }
+    .section.events {
+   
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,127,95,0.1);
+      margin: 40px 15px;
+      text-align: center;
+      flex: 1;
+    }
+    .section h2 {
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+      color: #004d3a;
+      position: relative;
+    }
+    .section h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #007f5f;
+      margin: 12px auto 0;
+      border-radius: 2px;
+      box-shadow: 0 0 8px #007f5faa;
+    }
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 40px;
+      padding-bottom: 40px;
+    }
+    .menu-card {
+        background: #dff4ea;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 12px 25px rgba(0,127,95,0.12);
+      flex: 1 1 280px;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+    }
+    .menu-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 36px rgba(0,127,95,0.3);
+    }
+    .menu-card h3 {
+      color: #007f5f;
+      margin-bottom: 15px;
+      font-size: 1.7rem;
+      border-bottom: 2px solid #007f5f;
+      padding-bottom: 8px;
+    }
+    .menu-card ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: 1.05rem;
+      color: #444;
+    }
+    .menu-card li {
+      margin-bottom: 10px;
+    }
+    .menu-card button {
+      margin-top: 15px;
+      padding: 10px 16px;
+      background: #007f5f;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .menu-card button:hover {
+      background: #005f46;
+    }
+    footer {
+      background: #007f5f;
+      color: white;
+      text-align: center;
+      padding: 25px 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: auto;
+    }
+    @media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+    z-index: 10000; /* Pridané pre zobrazenie nad obsahom */
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #007f5f;
+    z-index: 11000; /* Pre istotu, hamburgerka tiež na vrchu */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="index.html#about"><img src="logo.png" alt="Kávaprevšetkých logo" class="logo" /></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html#about">O nás</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="index.html#gallery">Galéria</a></li>
+          <li><a href="index.html#reviews">Recenzie</a></li>
+          <li><a href="podujatia.html">Podujatia</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="objednavka.html">Objednať Kávu</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="mobile-menu">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="section events">
+    <div class="container">
+      <h2>Pripravované podujatia</h2>
+      <div class="menu-grid">
+        <form class="menu-card interest-form">
+          <h3>Workshop: Domáca filtrácia ☕</h3>
+          <ul>
+            <li><strong>Dátum:</strong> 12. júl 2025</li>
+            <li><strong>Miesto:</strong> Pražiareň pod Hradom</li>
+            <li><strong>O čom to bude:</strong> Naučíme vás pripravovať filtrovanú kávu – Chemex, V60 aj French Press v uvoľnenej atmosfére. 🌿</li>
+          </ul>
+          <input type="hidden" name="event" value="Workshop: Domáca filtrácia">
+          <button type="submit">Mám záujem</button>
+        </form>
+
+        <form class="menu-card interest-form">
+          <h3>Kávový kôšt: Kolumbia vs. Etiópia ☕🌍</h3>
+          <ul>
+            <li><strong>Dátum:</strong> 3. august 2025</li>
+            <li><strong>Miesto:</strong> Pražiareň pod Hradom</li>
+            <li><strong>O čom to bude:</strong> Degustácia výberových káv s vysvetlením pôvodu, profilov a spôsobov spracovania. Cupping a priateľská debata! 😋</li>
+          </ul>
+          <input type="hidden" name="event" value="Kávový kôšt: Kolumbia vs. Etiópia">
+          <button type="submit">Mám záujem</button>
+        </form>
+
+        <form class="menu-card interest-form">
+          <h3>Latte Art Turnaj 🎨☕</h3>
+          <ul>
+            <li><strong>Dátum:</strong> 17. august 2025</li>
+            <li><strong>Miesto:</strong> Pražiareň pod Hradom</li>
+            <li><strong>O čom to bude:</strong> Súťaž pre každého, kto miluje mliečnu penu a umenie. Príď sa zabaviť, súťažiť alebo len podporiť! 🏆</li>
+          </ul>
+          <input type="hidden" name="event" value="Latte Art Turnaj">
+          <button type="submit">Mám záujem</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Kávaprevšetkých – Pražiareň pod hradom. Všetky práva vyhradené.</p>
+    <p style="font-size: 0.85rem; color: #d9fbee;">Vyrobené s ❤️ na Slovensku. | Webdesign by Maxim Mlynek</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("mobile-menu");
+      const navLinks = document.querySelector(".nav-links");
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+
+      const forms = document.querySelectorAll(".interest-form");
+      forms.forEach(form => {
+        form.addEventListener("submit", async e => {
+          e.preventDefault();
+
+          const formData = new FormData(form);
+          const button = form.querySelector("button");
+
+          button.disabled = true;
+          button.textContent = "Odosiela sa...";
+
+          try {
+            const response = await fetch("https://formspree.io/f/xvgrbekj", {
+              method: "POST",
+              headers: { 'Accept': 'application/json' },
+              body: formData
+            });
+
+            if (response.ok) {
+              button.textContent = "Záujem potvrdený ✓";
+              button.style.backgroundColor = '#009f7f';
+            } else {
+              button.textContent = "Skúste znova ✖";
+              button.disabled = false;
+            }
+          } catch (err) {
+            button.textContent = "Chyba siete ✖";
+            button.disabled = false;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
